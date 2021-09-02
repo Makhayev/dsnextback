@@ -4,9 +4,11 @@ const PORT = process.env.PORT || 80;
 const pool = require('./db.js')
 const app = express()
 const upload = require('express-fileupload')
+const dotenv = require('dotenv').config()
 app.use(cors());
 app.use(upload())
 app.use(express.json())
+
 
 app.get('/getLastPost', async (req, res) => {
     try {
@@ -68,17 +70,7 @@ app.get('/getSomePosts/:page', async (req, res) => {
     }
 })
 
-// app.post('/sendPhoto', async (req, res) => {
-//     const image = req.files.image.data
-//     fetch('https://api.imgbb.com/1/upload', {
-//         method: 'POST',
-//         body: {
-//             key: 'db91b7fca6802f82b4b5aa5462e5b0d4',
-//             image: image,
-//             name: 'wrotever'
-//         }
-//     })
-// })
+
 
 app.post('/login', async (req, res) => {
     
@@ -87,7 +79,7 @@ app.post('/login', async (req, res) => {
         console.log(req.body)
         console.log('login')
 
-        if (req.body.Email === 'datasci@nu.edu.kz' && req.body.Password === 'loveds2021') {
+        if (req.body.Email === process.env.EMAIL && req.body.Password === process.env.PASSWORD) {
             console.log('TRUE')
             res.send({isAuth: 'auth'})
 
