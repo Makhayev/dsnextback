@@ -9,6 +9,10 @@ app.use(cors());
 app.use(upload())
 app.use(express.json())
 
+app.get('/', async (req, res) => {
+    console.log(process.env.PORT)
+    console.log(process.env.DB_USER)
+})
 
 app.get('/getLastPost', async (req, res) => {
     try {
